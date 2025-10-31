@@ -1,0 +1,8 @@
+# Minimal requirements for testing (no AI models yet)
+flask>=3.0.0
+boto3>=1.34.0
+Pillow>=10.1.0
+opencv-python>=4.8.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+

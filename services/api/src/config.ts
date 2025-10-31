@@ -14,10 +14,27 @@ export const config = {
   // Database
   databaseUrl: process.env.DATABASE_URL!,
 
-  // Redis
-  redisHost: process.env.REDIS_HOST || 'localhost',
-  redisPort: parseInt(process.env.REDIS_PORT || '6379', 10),
-  redisPassword: process.env.REDIS_PASSWORD || undefined,
+  // Redis - parse REDIS_URL if provided, otherwise use individual values
+  ...(() => {
+    const redisUrl = process.env.REDIS_URL;
+    if (redisUrl) {
+      // Parse redis://default:password@host:port
+      const match = redisUrl.match(/redis:\/\/(?:([^:]+):([^@]+)@)?([^:]+):(\d+)/);
+      if (match) {
+        return {
+          redisHost: match[3],
+          redisPort: parseInt(match[4], 10),
+          redisPassword: match[2] || undefined,
+        };
+      }
+    }
+    // Fallback to individual env vars
+    return {
+      redisHost: process.env.REDIS_HOST || 'localhost',
+      redisPort: parseInt(process.env.REDIS_PORT || '6379', 10),
+      redisPassword: process.env.REDIS_PASSWORD || undefined,
+    };
+  })(),
 
   // AWS S3
   awsRegion: process.env.AWS_REGION || 'us-east-1',
