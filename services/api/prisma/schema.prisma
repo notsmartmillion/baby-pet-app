@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String?  @unique
+  appleId   String?  @unique
+  googleId  String?  @unique
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  jobs             Job[]
+  entitlement      Entitlement?
+  deletionRequests DeletionRequest[]
+  
+  @@index([email])
+}
+
+model Entitlement {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  tier              String   @default("free") // free, monthly, lifetime
+  creditsRemaining  Int      @default(1) // free users get 1
+  unlimitedUntil    DateTime? // for subscriptions
+  activeSubscription Boolean  @default(false)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([userId])
+}
+
+model Job {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  petType          String // cat, dog
+  status           String   @default("pending") // pending, processing, completed, failed
+  inputImageKeys   String[] // S3 keys
+  resultImageKey   String?
+  resultUrl        String?
+  isWatermarked    Boolean  @default(true)
+  breed            String?
+  error            String?
+  
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  completedAt DateTime?
+  
+  @@index([userId, createdAt])
+  @@index([status])
+}
+
+model DeletionRequest {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  reason       String?
+  status       String   @default("pending") // pending, processing, completed
+  requestedAt  DateTime @default(now())
+  completedAt  DateTime?
+  
+  @@index([userId])
+  @@index([status])
+}
+
+model Purchase {
+  id        String   @id @default(cuid())
+  userId    String
+  
+  platform        String // ios, android
+  productId       String
+  transactionId   String   @unique
+  originalTransactionId String?
+  receiptData     String
+  isVerified      Boolean  @default(false)
+  
+  createdAt DateTime @default(now())
+  
+  @@index([userId])
+  @@index([transactionId])
+}
+

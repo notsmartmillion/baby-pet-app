@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+.expo/
+.expo-shared/
+*.log
+*.env
+.env.local
+.DS_Store
+venv/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+*.tsbuildinfo
+.turbo/
+

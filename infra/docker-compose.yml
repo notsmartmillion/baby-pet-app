@@ -1,0 +1,26 @@
+services:
+  # Using your existing PostgreSQL (port 5432) and Redis (port 6379) on Windows
+  # Only running LocalStack for S3 in Docker
+  
+  # LocalStack for S3 (local development)
+  localstack:
+    image: localstack/localstack:latest
+    container_name: babypet-s3
+    environment:
+      SERVICES: s3
+      DEFAULT_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+    ports:
+      - '4566:4566'
+    volumes:
+      - localstack_data:/var/lib/localstack
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  localstack_data:
+
