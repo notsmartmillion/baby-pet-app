@@ -2,9 +2,9 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { trpc, trpcClient } from '../src/utils/trpc';
+import { trpc, trpcClient } from '../utils/trpc';
 import { useEffect } from 'react';
-import { registerForPushNotificationsAsync } from '../src/utils/notifications';
+import { registerForPushNotificationsAsync } from '../utils/notifications';
 
 const queryClient = new QueryClient({
   defaultOptions: {
