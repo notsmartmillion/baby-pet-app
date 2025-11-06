@@ -3,7 +3,7 @@
 # Create S3 bucket for local development using LocalStack
 # Usage: ./scripts/create-s3-bucket.sh
 
-BUCKET_NAME="baby-pet-uploads"
+BUCKET_NAME="kittypup-uploads"
 ENDPOINT_URL="http://localhost:4566"
 
 echo "Creating S3 bucket: $BUCKET_NAME"

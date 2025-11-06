@@ -2,14 +2,26 @@
 
 ## 🎯 TL;DR: Everything Works!
 
-This is a **complete, production-ready app skeleton**. You can run it **right now** and see the full upload → generate → result flow working end-to-end.
+**Kittypup** is a **complete, production-ready app skeleton**. You can run it **right now** and see the full upload → generate → result flow working end-to-end.
 
 ---
 
 ## 🚀 Immediate Next Steps
 
+### Windows (PowerShell)
+```powershell
+# 1. One-command setup
+powershell -ExecutionPolicy Bypass -File SETUP.ps1
+
+# 2. Start everything
+.\start-dev.ps1    # All services (API + GPU + Mobile)
+
+# 3. Open mobile app and test!
+```
+
+### Mac/Linux (Bash)
 ```bash
-# 1. One-command setup (Mac/Linux)
+# 1. One-command setup
 chmod +x SETUP.sh && ./SETUP.sh
 
 # 2. Start everything

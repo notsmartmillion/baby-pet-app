@@ -1,4 +1,4 @@
-# Compliance Guide 📋
+# Compliance Guide 📋 - Kittypup
 
 This app handles user-uploaded photos and must comply with:
 - GDPR (EU)

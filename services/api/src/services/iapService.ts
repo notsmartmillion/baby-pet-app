@@ -1,5 +1,5 @@
 import { prisma } from '../db';
-import { VerifyPurchaseInput, PurchaseResult } from '@baby-pet/types';
+import { VerifyPurchaseInput, PurchaseResult } from '@kittypup/types';
 import { grantCredits, activateSubscription } from './entitlementService';
 
 /**

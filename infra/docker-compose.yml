@@ -5,7 +5,7 @@ services:
   # LocalStack for S3 (local development)
   localstack:
     image: localstack/localstack:latest
-    container_name: babypet-s3
+    container_name: kittypup-s3
     environment:
       SERVICES: s3
       DEFAULT_REGION: us-east-1

@@ -1,4 +1,4 @@
-package com.yourcompany.babypet
+package com.yourcompany.kittypup
 
 import android.app.Application
 import android.content.res.Configuration

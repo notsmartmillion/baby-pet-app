@@ -1,6 +1,6 @@
 # 🚀 Quick Run Guide
 
-Get Baby Pet App running in **5 minutes**!
+Get Kittypup running in **5 minutes**!
 
 ## Prerequisites Check
 
@@ -12,6 +12,22 @@ docker --version  # Optional but recommended
 
 ## One-Command Setup
 
+### Windows (PowerShell)
+```powershell
+# Run setup script
+powershell -ExecutionPolicy Bypass -File SETUP.ps1
+
+# Then start all services
+.\start-dev.ps1
+
+# Or just backend (API + GPU Worker)
+.\start-backend.ps1
+
+# Stop everything
+.\stop-dev.ps1
+```
+
+### Mac/Linux
 ```bash
 chmod +x SETUP.sh
 ./SETUP.sh
@@ -29,6 +45,12 @@ This will:
 
 ### Option 1: All Services (Recommended)
 
+**Windows:**
+```powershell
+.\start-dev.ps1  # Starts API, GPU Worker, and Mobile App
+```
+
+**Mac/Linux:**
 ```bash
 # Terminal 1 - API + Mobile
 npm run dev
@@ -74,7 +96,7 @@ The setup script creates a test user with 3 free credits:
 
 ```
 User ID: test-user-123
-Email: test@babypet.app
+Email: test@kittypup.app
 Credits: 3
 ```
 

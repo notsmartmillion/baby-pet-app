@@ -1,5 +1,5 @@
 import { createTRPCReact, httpBatchLink } from '@trpc/react-query';
-import type { TRPCRouter } from '@baby-pet/api'; // Import from your API service
+import type { TRPCRouter } from '@kittypup/api'; // Import from your API service
 import Constants from 'expo-constants';
 import { useAuthStore } from '../store/authStore';
 

@@ -9,7 +9,7 @@
 import { startWorker } from './queue';
 import { config } from './config';
 
-console.log('🚀 Starting Baby Pet worker...');
+console.log('🚀 Starting Kittypup worker...');
 console.log(`📍 GPU Worker URL: ${config.gpuWorkerUrl}`);
 
 const worker = startWorker();

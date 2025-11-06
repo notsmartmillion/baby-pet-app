@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Baby Pet App - Complete Setup Script
+# Kittypup - Complete Setup Script
 # Run this once to set up everything for local development
 
 set -e  # Exit on error
 
-echo "🐾 Baby Pet App - Setup Script"
+echo "🐾 Kittypup - Setup Script"
 echo "==============================="
 echo ""
 

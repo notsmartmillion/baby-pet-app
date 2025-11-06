@@ -2,9 +2,12 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
 import { trpc } from '../utils/trpc';
 import { useAuthStore } from '../store/authStore';
+import { useRouter } from 'expo-router';
 
 export default function SettingsScreen() {
+  const router = useRouter();
   const userId = useAuthStore((state) => state.userId);
+  const isEUUser = useAuthStore((state) => state.isEUUser);
   const deletionMutation = trpc.requestDeletion.useMutation();
   const exportMutation = trpc.requestExport.useMutation();
 
@@ -74,7 +77,9 @@ export default function SettingsScreen() {
         
         <TouchableOpacity style={styles.button} onPress={handleExportData}>
           <Text style={styles.buttonText}>📦 Download My Data</Text>
-          <Text style={styles.buttonSubtext}>GDPR Art. 15 - Right of access</Text>
+          {isEUUser && (
+            <Text style={styles.buttonSubtext}>GDPR Art. 15 - Right of access</Text>
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -82,9 +87,11 @@ export default function SettingsScreen() {
           onPress={handleDeleteAccount}
         >
           <Text style={[styles.buttonText, styles.dangerText]}>🗑️ Delete All My Data</Text>
-          <Text style={styles.buttonSubtext}>
-            GDPR Art. 17 - Right to be forgotten
-          </Text>
+          {isEUUser && (
+            <Text style={styles.buttonSubtext}>
+              GDPR Art. 17 - Right to be forgotten
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
 
@@ -98,17 +105,25 @@ export default function SettingsScreen() {
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Legal</Text>
-        <TouchableOpacity style={styles.linkButton}>
+        <TouchableOpacity 
+          style={styles.linkButton}
+          onPress={() => router.push('/privacy')}
+        >
           <Text style={styles.linkText}>Privacy Policy</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.linkButton}>
+        <TouchableOpacity 
+          style={styles.linkButton}
+          onPress={() => router.push('/terms')}
+        >
           <Text style={styles.linkText}>Terms of Service</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Baby Pet App v1.0.0</Text>
-        <Text style={styles.footerText}>GDPR & CCPA Compliant</Text>
+        <Text style={styles.footerText}>Kittypup v1.0.0</Text>
+        {isEUUser && (
+          <Text style={styles.footerText}>GDPR & CCPA Compliant</Text>
+        )}
       </View>
     </ScrollView>
   );

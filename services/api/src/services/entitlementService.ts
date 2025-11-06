@@ -1,5 +1,5 @@
 import { prisma } from '../db';
-import { Entitlement, SubscriptionTier } from '@baby-pet/types';
+import { Entitlement, SubscriptionTier } from '@kittypup/types';
 
 export const getUserEntitlement = async (userId: string): Promise<Entitlement> => {
   let entitlement = await prisma.entitlement.findUnique({

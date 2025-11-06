@@ -1,6 +1,6 @@
 # Deployment Guide 🚀
 
-Production deployment options for Baby Pet App.
+Production deployment options for Kittypup.
 
 ## Architecture Overview
 
@@ -64,7 +64,7 @@ fly deploy
 
 **fly.toml** (create in `services/api/`):
 ```toml
-app = "baby-pet-api"
+app = "kittypup-api"
 primary_region = "iad"
 
 [build]
@@ -102,8 +102,8 @@ primary_region = "iad"
 
 **Option 1: Fly Postgres**
 ```bash
-fly postgres create --name baby-pet-db
-fly postgres attach --app baby-pet-api baby-pet-db
+fly postgres create --name kittypup-db
+fly postgres attach --app kittypup-api kittypup-db
 ```
 
 **Option 2: Supabase**
@@ -121,7 +121,7 @@ fly postgres attach --app baby-pet-api baby-pet-db
 
 **Option 2: Fly Redis**
 ```bash
-fly redis create --name baby-pet-redis
+fly redis create --name kittypup-redis
 # Note connection details, set as secrets
 ```
 
@@ -139,7 +139,7 @@ fly redis create --name baby-pet-redis
 # services/worker-gpu/modal_app.py
 import modal
 
-stub = modal.Stub("baby-pet-gpu")
+stub = modal.Stub("kittypup-gpu")
 
 # Define GPU image with dependencies
 image = modal.Image.debian_slim().pip_install_from_requirements("requirements.txt")
@@ -179,9 +179,9 @@ modal token set --token-id xxx --token-secret yyy
 
 **AWS S3:**
 ```bash
-aws s3 mb s3://baby-pet-uploads
+aws s3 mb s3://kittypup-uploads
 aws s3api put-bucket-encryption \
-  --bucket baby-pet-uploads \
+  --bucket kittypup-uploads \
   --server-side-encryption-configuration '{
     "Rules": [{
       "ApplyServerSideEncryptionByDefault": {
@@ -202,14 +202,14 @@ aws s3api put-bucket-encryption \
 
 ### API Server (`services/api/.env`)
 ```bash
-DATABASE_URL="postgresql://user:pass@host:5432/babypet"
+DATABASE_URL="postgresql://user:pass@host:5432/kittypup"
 REDIS_HOST="redis.fly.dev"
 REDIS_PORT=6379
 REDIS_PASSWORD="xxx"
 AWS_REGION="us-east-1"
 AWS_ACCESS_KEY_ID="xxx"
 AWS_SECRET_ACCESS_KEY="xxx"
-S3_BUCKET="baby-pet-uploads"
+S3_BUCKET="kittypup-uploads"
 GPU_WORKER_URL="https://xxx.modal.run"
 SENTRY_DSN="https://xxx@sentry.io/xxx"
 API_SECRET="xxx"
@@ -220,7 +220,7 @@ API_SECRET="xxx"
 AWS_REGION="us-east-1"
 AWS_ACCESS_KEY_ID="xxx"
 AWS_SECRET_ACCESS_KEY="xxx"
-S3_BUCKET="baby-pet-uploads"
+S3_BUCKET="kittypup-uploads"
 MODEL_PATH="/models"
 ```
 
@@ -228,7 +228,7 @@ MODEL_PATH="/models"
 ```json
 {
   "extra": {
-    "apiUrl": "https://baby-pet-api.fly.dev"
+    "apiUrl": "https://kittypup-api.fly.dev"
   }
 }
 ```
@@ -349,7 +349,7 @@ npm run prisma:migrate
 **Production:**
 ```bash
 # Fly.io
-fly ssh console -a baby-pet-api
+fly ssh console -a kittypup-api
 cd /app/services/api
 npx prisma migrate deploy
 ```
@@ -368,7 +368,7 @@ Set up these scheduled tasks:
 **1. Cleanup expired images (daily)**
 ```bash
 # Fly.io: Use fly-cron or external cron service
-0 2 * * * curl https://baby-pet-api.fly.dev/internal/cleanup
+0 2 * * * curl https://kittypup-api.fly.dev/internal/cleanup
 ```
 
 Or use GitHub Actions:
@@ -381,7 +381,7 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -X POST https://baby-pet-api.fly.dev/internal/cleanup
+      - run: curl -X POST https://kittypup-api.fly.dev/internal/cleanup
 ```
 
 **2. Process pending deletion requests (hourly)**

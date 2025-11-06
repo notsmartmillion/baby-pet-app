@@ -1,4 +1,4 @@
-# 🐾 Baby Pet App - START HERE
+# 🐾 Kittypup - START HERE
 
 ## 🎯 You're 5 Minutes Away from Running This App!
 
@@ -94,7 +94,7 @@ npm run dev:gpu  # Terminal 2
 3. **Upload → Generate flow**:
    - Select Cat or Dog
    - Pick 3-6 photos
-   - Tap "Generate Baby Pet"
+   - Tap "Generate Baby Version"
    - Watch status update
    - View result!
 
@@ -212,7 +212,7 @@ npm run build:api        # Just API
 ## 🔍 Project Structure
 
 ```
-baby-pet-app/
+kittypup/
 ├── apps/mobile/          # React Native app
 │   ├── src/app/         # Screens (Expo Router)
 │   ├── src/utils/       # tRPC client, helpers

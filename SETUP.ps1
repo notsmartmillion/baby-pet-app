@@ -1,7 +1,7 @@
-# Baby Pet App - Windows Setup Script
+# Kittypup - Windows Setup Script
 # Run this with: powershell -ExecutionPolicy Bypass -File SETUP.ps1
 
-Write-Host "🐾 Baby Pet App - Windows Setup" -ForegroundColor Cyan
+Write-Host "🐾 Kittypup - Windows Setup" -ForegroundColor Cyan
 Write-Host "===============================" -ForegroundColor Cyan
 Write-Host ""
 

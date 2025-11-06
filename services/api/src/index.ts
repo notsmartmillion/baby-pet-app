@@ -177,7 +177,7 @@ const start = async () => {
     fastify.log.info(`
     ╔═══════════════════════════════════════════╗
     ║                                           ║
-    ║   🐾 Baby Pet API Server                  ║
+    ║   🐾 Kittypup API Server                   ║
     ║                                           ║
     ║   Environment: ${config.nodeEnv.padEnd(27)}║
     ║   Port: ${String(config.port).padEnd(33)}║

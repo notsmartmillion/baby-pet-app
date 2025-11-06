@@ -1,5 +1,5 @@
 {
-  "name": "@baby-pet/mobile",
+  "name": "@kittypup/mobile",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -10,7 +10,7 @@
     "reset": "expo start -c"
   },
   "dependencies": {
-    "@baby-pet/types": "*",
+    "@kittypup/types": "*",
     "@react-native/virtualized-lists": "^0.82.1",
     "@react-navigation/native": "^7.0.0",
     "@tanstack/react-query": "^4.36.1",

@@ -1,4 +1,4 @@
-# Baby Pet App - Architecture
+# Kittypup - Architecture
 
 ## Overview
 
@@ -71,7 +71,7 @@ TypeScript-first monorepo with Python GPU worker for high-quality image generati
 ## Directory Structure
 
 ```
-baby-pet-app/
+kittypup/
 ├── apps/
 │   └── mobile/              # Expo React Native app
 │       ├── src/

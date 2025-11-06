@@ -1,16 +1,39 @@
 # Quick Start Guide 🚀
 
-Get your Baby Pet App running locally in 10 minutes!
+Get Kittypup running locally in 10 minutes!
 
 ## Prerequisites
 
 - Node.js 20+
 - Python 3.11+
-- PostgreSQL 16+
-- Redis 7+
-- Docker (optional, for local stack)
+- Docker (recommended for PostgreSQL, Redis, S3)
+- PowerShell (Windows) or Bash (Mac/Linux)
 
-## Option 1: Docker (Recommended)
+## Option 1: Automated Setup (Recommended)
+
+### Windows (PowerShell)
+```powershell
+# One-time setup
+powershell -ExecutionPolicy Bypass -File SETUP.ps1
+
+# Start everything
+.\start-dev.ps1
+
+# Or just backend services
+.\start-backend.ps1
+```
+
+### Mac/Linux
+```bash
+# One-time setup
+chmod +x SETUP.sh && ./SETUP.sh
+
+# Start everything
+npm run dev        # Terminal 1
+npm run dev:gpu    # Terminal 2
+```
+
+## Option 2: Docker Manual Setup
 
 ```bash
 # 1. Start infrastructure (Postgres, Redis, LocalStack S3)
@@ -43,7 +66,7 @@ cd apps/mobile
 npm start
 ```
 
-## Option 2: Manual Setup
+## Option 3: Manual Step-by-Step Setup
 
 ### 1. Install Dependencies
 
@@ -55,7 +78,7 @@ npm install
 
 ```bash
 # Create PostgreSQL database
-createdb babypet
+createdb kittypup
 
 # Configure environment
 cd services/api
@@ -119,7 +142,7 @@ npm start
    - Pick 3-6 photos (for now, any images work)
 
 2. **Generate**
-   - Tap "Generate Baby Pet"
+   - Tap "Generate Baby Version"
    - Watch the job status update
 
 3. **View result**
@@ -146,7 +169,7 @@ npm start
 
 ### Database migrations fail
 - Drop and recreate: `npm run prisma:migrate reset`
-- Or manually: `dropdb babypet && createdb babypet`
+- Or manually: `dropdb kittypup && createdb kittypup`
 
 ## Next Steps
 

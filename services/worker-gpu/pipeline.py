@@ -1,5 +1,5 @@
 """
-Baby Pet Generation Pipeline
+Kittypup Generation Pipeline
 Transforms adult pets into kittens/puppies using diffusion models with identity preservation
 """
 
@@ -148,7 +148,7 @@ def apply_watermark(image: Image.Image) -> Image.Image:
     
     # Simple text watermark
     # TODO: Use logo/branded watermark
-    text = "BabyPet.app"
+    text = "Kittypup"
     
     # Position at bottom right
     width, height = img.size

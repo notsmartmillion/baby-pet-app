@@ -17,7 +17,7 @@ s3_client = boto3.client(
     aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
 )
 
-BUCKET = os.getenv('S3_BUCKET', 'baby-pet-uploads')
+BUCKET = os.getenv('S3_BUCKET', 'kittypup-uploads')
 DOWNLOAD_DIR = os.getenv('DOWNLOAD_DIR', '/tmp/downloads')
 
 def download_from_s3(s3_key: str) -> str:

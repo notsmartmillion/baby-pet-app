@@ -1,4 +1,4 @@
-# Baby Pet App - TODO List 📋
+# Kittypup - TODO List 📋
 
 Complete checklist of tasks to go from skeleton → production-ready app.
 
@@ -399,7 +399,7 @@ Complete checklist of tasks to go from skeleton → production-ready app.
 
 ### App Store Optimization (ASO)
 - [ ] **App Store listing**
-  - [ ] Catchy title: "Baby Pet - Kitten & Puppy AI"
+  - [ ] Catchy title: "Kittypup - AI Pet Baby Generator"
   - [ ] Subtitle/short description
   - [ ] Keywords: cat, dog, kitten, puppy, AI, photo, cute
   - [ ] Screenshots (5-8) showing before/after
@@ -422,7 +422,7 @@ Complete checklist of tasks to go from skeleton → production-ready app.
 - [ ] **Social media**
   - [ ] Create accounts (Instagram, TikTok, Twitter)
   - [ ] Post before/after examples
-  - [ ] Use hashtags: #babypet #kittens #puppies #ai
+  - [ ] Use hashtags: #kittypup #kittens #puppies #ai
   - [ ] Engage with pet communities
 
 ### Analytics & Metrics

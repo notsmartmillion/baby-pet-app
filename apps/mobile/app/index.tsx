@@ -12,7 +12,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import { trpc } from '../utils/trpc';
-import { PetType } from '@baby-pet/types';
+import { PetType } from '@kittypup/types';
 import { compressImage } from '../utils/imageCompression';
 import { useRouter } from 'expo-router';
 
@@ -59,8 +59,9 @@ export default function HomeScreen() {
     });
 
     if (!result.canceled) {
-      const uris = result.assets.map((asset) => asset.uri);
-      setSelectedImages((prev) => [...prev, ...uris].slice(0, 6));
+          const uris = result.assets.map((asset) => asset.uri);
+          // Allow 1-6 images (3-4 recommended for best results)
+          setSelectedImages((prev) => [...prev, ...uris].slice(0, 6));
     }
   };
 
@@ -95,8 +96,7 @@ export default function HomeScreen() {
 
   const handleGenerate = async () => {
     if (selectedImages.length === 0) {
-      Alert.alert('No images', 'Please select at least one photo of your pet');
-      return;
+      return; // Button is already disabled, this shouldn't be reached
     }
 
     try {
@@ -145,9 +145,12 @@ export default function HomeScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>🐾 Baby Pet Generator</Text>
+        <Text style={styles.title}>🐾 Kittypup</Text>
         <Text style={styles.subtitle}>
-          Transform your pet into an adorable baby!
+          Never saw your pet as a puppy or kitten?
+        </Text>
+        <Text style={styles.subtitleSecondary}>
+          See how your rescued furry friend looked as a baby with our magical AI technology! ✨
         </Text>
       </View>
 
@@ -188,12 +191,15 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Image Picker */}
-      <TouchableOpacity style={styles.pickButton} onPress={pickImages}>
-        <Text style={styles.pickButtonText}>
-          📷 Select Photos ({selectedImages.length}/6)
-        </Text>
-      </TouchableOpacity>
+          {/* Image Picker */}
+          <TouchableOpacity style={styles.pickButton} onPress={pickImages}>
+            <Text style={styles.pickButtonText}>
+              📷 Select Photos ({selectedImages.length}/6)
+            </Text>
+            <Text style={styles.pickButtonSubtext}>
+              3-4 photos recommended for best results
+            </Text>
+          </TouchableOpacity>
 
       {/* Selected Images Preview */}
       {selectedImages.length > 0 && (
@@ -214,14 +220,19 @@ export default function HomeScreen() {
 
       {/* Generate Button */}
       <TouchableOpacity
-        style={[styles.generateButton, uploading && styles.generateButtonDisabled]}
+        style={[
+          styles.generateButton, 
+          (uploading || selectedImages.length === 0) && styles.generateButtonDisabled
+        ]}
         onPress={handleGenerate}
         disabled={uploading || selectedImages.length === 0}
       >
         {uploading ? (
           <ActivityIndicator color="#fff" />
         ) : (
-          <Text style={styles.generateButtonText}>✨ Generate Baby Pet</Text>
+          <Text style={styles.generateButtonText}>
+            ✨ {petType === PetType.CAT ? 'Kittify!' : 'Puppify!'}
+          </Text>
         )}
       </TouchableOpacity>
 
@@ -310,6 +321,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
     textAlign: 'center',
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  subtitleSecondary: {
+    fontSize: 14,
+    color: '#888',
+    textAlign: 'center',
+    lineHeight: 20,
+    paddingHorizontal: 8,
   },
   entitlementCard: {
     backgroundColor: '#fff',
@@ -376,6 +396,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '600',
+  },
+  pickButtonSubtext: {
+    color: '#E3F2FD',
+    fontSize: 12,
+    marginTop: 4,
   },
   imageGrid: {
     flexDirection: 'row',

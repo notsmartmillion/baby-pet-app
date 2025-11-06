@@ -1,10 +1,10 @@
 import { prisma } from '../db';
 import { jobQueue } from '../queue';
 import { TRPCError } from '@trpc/server';
-import { CreateJobInput, Job } from '@baby-pet/types';
+import { CreateJobInput, Job } from '@kittypup/types';
 import { getPresignedDownloadUrl } from './s3Service';
 import { getUserEntitlement } from './entitlementService';
-import { JobStatus } from '@baby-pet/types';
+import { JobStatus } from '@kittypup/types';
 
 export const createJob = async (userId: string, input: CreateJobInput): Promise<Job> => {
   // Check entitlements

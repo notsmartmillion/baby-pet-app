@@ -1,6 +1,6 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import { Context } from './context';
-import * as schemas from '@baby-pet/types';
+import * as schemas from '@kittypup/types';
 import { getPresignedUploadUrl, getPresignedDownloadUrl } from '../services/s3Service';
 import { createJob, getJob, listUserJobs, handleWorkerCallback } from '../services/jobService';
 import { getUserEntitlement, consumeCredit } from '../services/entitlementService';

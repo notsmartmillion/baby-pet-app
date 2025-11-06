@@ -33,7 +33,7 @@ const PRODUCTS: Product[] = [
   {
     id: 'credit_5',
     title: '5 Credits',
-    description: 'Generate 5 baby pet images',
+    description: 'Generate 5 images',
     price: '$4.99',
     credits: 5,
     isSubscription: false,
@@ -41,7 +41,7 @@ const PRODUCTS: Product[] = [
   {
     id: 'credit_10',
     title: '10 Credits',
-    description: 'Generate 10 baby pet images',
+    description: 'Generate 10 images',
     price: '$8.99',
     credits: 10,
     isSubscription: false,
@@ -112,7 +112,7 @@ export default function PurchaseScreen() {
       <View style={styles.header}>
         <Text style={styles.title}>Get Premium ✨</Text>
         <Text style={styles.subtitle}>
-          Remove watermarks and generate unlimited baby pet images!
+          Unlock unlimited generations and remove watermarks!
         </Text>
       </View>
 

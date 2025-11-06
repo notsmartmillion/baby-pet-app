@@ -1,4 +1,4 @@
-package com.yourcompany.babypet
+package com.yourcompany.kittypup
 
 import android.os.Build
 import android.os.Bundle

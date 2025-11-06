@@ -1,4 +1,4 @@
-# 🐾 Baby Pet App - Production-Ready Skeleton
+# 🐾 Kittypup - Production-Ready AI Pet App
 
 Transform adult pets into adorable babies using AI! Complete TypeScript-first monorepo with Python GPU worker.
 
@@ -9,15 +9,33 @@ Transform adult pets into adorable babies using AI! Complete TypeScript-first mo
 
 ## ⚡ Quick Start
 
+### One-Command Setup + Start (All Services)
+
+```powershell
+# Windows PowerShell - Start API, GPU Worker, AND Mobile App
+.\start-dev.ps1
+
+# Or start just backend services (recommended for rapid iteration)
+.\start-backend.ps1
+
+# Stop all services
+.\stop-dev.ps1
+```
+
+```bash
+# Mac/Linux - Use npm scripts
+npm run dev              # API + Mobile
+npm run dev:gpu          # GPU Worker (separate terminal)
+```
+
+### First Time Setup
+
 ```bash
 # Windows
 powershell -ExecutionPolicy Bypass -File SETUP.ps1
 
 # Mac/Linux
 chmod +x SETUP.sh && ./SETUP.sh
-
-# Then start everything
-npm run dev
 ```
 
 **That's it!** Your app is running locally. 🎉
@@ -70,7 +88,7 @@ A **complete, production-ready mobile app** for transforming pet photos into bab
 ## 📁 Project Structure
 
 ```
-baby-pet-app/
+kittypup/
 ├── apps/mobile/          # React Native + Expo
 ├── services/
 │   ├── api/              # Fastify + tRPC backend
@@ -78,6 +96,53 @@ baby-pet-app/
 ├── packages/types/       # Shared Zod schemas
 └── infra/                # Docker Compose
 ```
+
+---
+
+## 🏗️ Architecture Flow
+
+```
+┌─────────────────┐
+│   Mobile App    │ (React Native + Expo)
+│  (iOS/Android)  │
+└────────┬────────┘
+         │ tRPC (Type-Safe API)
+         ▼
+┌─────────────────┐     ┌──────────────┐
+│   API Server    │────>│  S3 Storage  │ (Images)
+│   (Fastify)     │     │ (AWS/R2)     │
+└────────┬────────┘     └──────────────┘
+         │
+         ├─────────────┐
+         ▼             ▼
+┌──────────────┐  ┌──────────────┐
+│  PostgreSQL  │  │    Redis     │
+│   (Prisma)   │  │   (BullMQ)   │
+└──────────────┘  └──────┬───────┘
+                         │
+                         ▼
+                  ┌──────────────┐
+                  │  TS Worker   │ (Job Queue Processor)
+                  └──────┬───────┘
+                         │ HTTP POST
+                         ▼
+                  ┌──────────────┐
+                  │  GPU Worker  │ (Python + PyTorch)
+                  │   (Modal)    │ (AI Generation)
+                  └──────┬───────┘
+                         │ Callback
+                         ▼
+                  [Job Complete] ──> Push Notification
+```
+
+**Data Flow:**
+1. User uploads photos → Compressed & sent to S3
+2. API creates job → Enqueued in Redis (BullMQ)
+3. TS Worker picks up job → Calls GPU Worker via HTTP
+4. GPU Worker downloads images from S3 → Runs AI model
+5. GPU Worker uploads result to S3 → Callbacks API
+6. API updates job status → Sends push notification
+7. Mobile app polls/receives notification → Displays result
 
 ---
 
@@ -284,7 +349,7 @@ The setup script creates a test user:
 
 ```
 User ID: test-user-123
-Email: test@babypet.app
+Email: test@kittypup.app
 Credits: 3
 ```
 
@@ -362,6 +427,6 @@ Built with ❤️ using:
 
 **Ready to build? [Start Here →](START_HERE.md)**
 
-Made with 🐾 for pet lovers everywhere
+Made with 🐾 by Kittypup
 
 </div>

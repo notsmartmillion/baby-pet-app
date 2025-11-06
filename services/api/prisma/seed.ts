@@ -11,7 +11,7 @@ async function main() {
     update: {},
     create: {
       id: 'test-user-123',
-      email: 'test@babypet.app',
+      email: 'test@kittypup.app',
     },
   });
 
